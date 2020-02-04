@@ -38,16 +38,16 @@ $("#searchButton").click(function (event) {
     var tempF = (response.main.temp-273.15)*1.80 +32;
         console.log(tempF);
     var tempFd= tempF.toFixed(1);
-    $(".temp").text(tempFd+" "+"°F");
+    $(".temp").text("Temperature: "+tempFd+" "+"°F");
     // Get Humidity
     var humidity=(response.main.humidity)
-    $(".humidity").text(humidity+" "+"%");
+    $(".humidity").text("Humidity: "+humidity+" "+"%");
     // Get Wind Speed
     var wind= (response.wind.speed)*2.2369362912
     console.log(response.wind.speed)
     console.log(wind)
      var windd=wind.toFixed(1);
-    $(".wind").text(windd+" "+"MPH");
+    $(".wind").text("Wind Speed: "+windd+" "+"MPH");
         
     });
 
@@ -76,7 +76,10 @@ $("#searchButton").click(function (event) {
         var tempF = (response.list[7].main.temp-273.15)*1.80 +32;
         console.log(tempF);
         var tempFd= tempF.toFixed(1);
-        $(".temp1").text(tempFd+" "+"°F");
+        $(".temp1").text("Temp: "+tempFd+" "+"°F");
+
+        var humidity=(response.list[7].main.humidity)
+        $(".humidity1").text("Humidity: "+humidity+" "+"%");
 
             
         });
