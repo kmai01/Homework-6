@@ -44,8 +44,8 @@ $("#searchButton").click(function (event) {
     var wind= (response.wind.speed)*2.2369362912
     console.log(response.wind.speed)
     console.log(wind)
-     var windd=wind.toFixed(1);
-    $(".wind").text("Wind Speed: "+windd+" "+"MPH");
+     var windSpeed=wind.toFixed(1);
+    $(".wind").text("Wind Speed: "+windSpeed+" "+"MPH");
 
     var lon=response.coord.lon
     console.log(lon)
@@ -76,8 +76,15 @@ $("#searchButton").click(function (event) {
         method: 'GET'
         }).then(function (response) {
         console.log(response)
+        var forecastHeader = $("<h4>"+"5- Days Forecast"+"</h4>")
+        $(".forecast-container").append(forecastHeader)
 
-        for ( var i = 7; i < response.list.length; i = i+8) {
+       
+
+            
+
+        
+        for ( var j = 7; j < response.list.length; j = j+8) {
         let unixTimestamp=response.list[i].dt
         console.log(unixTimestamp);
 
@@ -85,21 +92,21 @@ $("#searchButton").click(function (event) {
         console.log(date);
         var ndate=moment(date).format('MM/DD/YYYY')
         console.log(ndate);
-        $(".date1").text(ndate);
+        $(".day[i]").text(ndate);
 
-        let icon=response.list[i].weather[0].icon
+        let icon=response.list[j].weather[0].icon
         console.log(icon);
         $(".icon").text(icon);
 
-        var tempF = (response.list[i].main.temp-273.15)*1.80 +32;
+        var tempF = (response.list[j].main.temp-273.15)*1.80 +32;
         console.log(tempF);
         var tempFd= tempF.toFixed(1);
-        $(".temp1").text("Temp: "+tempFd+" "+"°F");
+        $(".temp2").text("Temp: "+tempFd+" "+"°F");
 
-        var humidity=(response.list[7].main.humidity)
-        $(".humidity1").text("Humidity: "+humidity+" "+"%");
+        var humidity=(response.list[j].main.humidity)
+        $(".humidity2").text("Humidity: "+humidity+" "+"%");
         console.log(humidity);
-
+          }
         }
             
         });
