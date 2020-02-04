@@ -60,7 +60,8 @@ $("#searchButton").click(function (event) {
         }).then(function (response) {
         console.log(response)
 
-        let unixTimestamp=response.list[7].dt
+        for ( var i = 7; i < response.list.length; i = i+8) {
+        let unixTimestamp=response.list[i].dt
         console.log(unixTimestamp);
 
         var date = new Date(unixTimestamp * 1000)
@@ -69,11 +70,11 @@ $("#searchButton").click(function (event) {
         console.log(ndate);
         $(".date1").text(ndate);
 
-        let icon=response.list[7].weather[0].icon
+        let icon=response.list[i].weather[0].icon
         console.log(icon);
         $(".icon").text(icon);
 
-        var tempF = (response.list[7].main.temp-273.15)*1.80 +32;
+        var tempF = (response.list[i].main.temp-273.15)*1.80 +32;
         console.log(tempF);
         var tempFd= tempF.toFixed(1);
         $(".temp1").text("Temp: "+tempFd+" "+"°F");
@@ -81,6 +82,7 @@ $("#searchButton").click(function (event) {
         var humidity=(response.list[7].main.humidity)
         $(".humidity1").text("Humidity: "+humidity+" "+"%");
 
+        }
             
         });
 
