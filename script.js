@@ -1,7 +1,5 @@
 
 
-
-
 $("#searchButton").click(function (event) {
     event.preventDefault();
 
@@ -32,7 +30,7 @@ $("#searchButton").click(function (event) {
    
     // Get a city
 
-    $(".city-date").text(response.name+" "+"("+ndate+")"+" "+response.weather[0].icon)
+    $(".city-date").html("<h4>"+response.name+" "+"("+ndate+")"+" "+response.weather[0].icon+"</h4>")
     
     // Get temperature and convert to F°
     var tempF = (response.main.temp-273.15)*1.80 +32;
@@ -48,9 +46,28 @@ $("#searchButton").click(function (event) {
     console.log(wind)
      var windd=wind.toFixed(1);
     $(".wind").text("Wind Speed: "+windd+" "+"MPH");
+
+    var lon=response.coord.lon
+    console.log(lon)
+    var lat=response.coord.lat
+    console.log(lat)
+
+    var uvURL = "https://api.openweathermap.org/data/2.5/uvi?&appid=981be588e021507f49cbb2c9d6bdad93&lat="+lat+"&lon="+lon
+   
+
+    $.ajax({
+        url: uvURL,
+        method: 'GET'
+        }).then(function (response) {
+        console.log(response)
+        var uvindex=response.value
+        $(".uv-index").text("UV Index: "+uvindex)
+                
+        });
         
     });
-
+    
+   
 
     var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q="+cityname+"&appid=981be588e021507f49cbb2c9d6bdad93"
 
@@ -81,19 +98,12 @@ $("#searchButton").click(function (event) {
 
         var humidity=(response.list[7].main.humidity)
         $(".humidity1").text("Humidity: "+humidity+" "+"%");
+        console.log(humidity);
 
         }
             
         });
 
-      //  var uvURL = "https://api.openweathermap.org/data/2.5/uvi?q="+cityname+"&appid=981be588e021507f49cbb2c9d6bdad93"
-
-    // $.ajax({
-        // url: uvURL,
-       // method: 'GET'
-        // }).then(function (response) {
-       //  console.log(response)
-            
-       // });
+     
 });
 
