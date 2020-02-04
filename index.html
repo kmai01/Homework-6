@@ -1,34 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Weather Dashboard</title>
-    
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Weather Dashboard</title>
+
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="moment-with-locales.js"></script>
+
 </head>
+
 <body>
 
-    <div class="header">
-        <div class="container">
-          <h1 class="display-4">Weather Dashboard</h1>
-         
-        </div>
+  <div class="header">
+    <div class="container">
+      <h1 class="display-4">Weather Dashboard</h1>
+
+    </div>
+  </div>
+  <h4> Search for a city</h4>
+  <form class="form-inline my-2 my-lg-0">
+    
+    <input class="form-control sm-2" type="text" id="cityform" aria-label="Search">
+    <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton"><i class="fa fa-search"
+        aria-hidden="true"></i></button>
+  </form>
+
+  <div class="weather-container">
+    <div class="city-date"></div>
+    <div class="temp"></div>
+    <div class="humidity"></div>
+    <div class="wind"></div>
+    <div class="uv-index"></div>
+
+    <h4> 5- Days Forecast</h4>
+    <div class="five-container">
+      <div class="date">
+        <div class="date1"></div>
+        <div class="icon"></div>
+        <div class="temp1"></div>
+
       </div>
-     <h3> Search for a city</h3>
-    <form class="form-inline my-2 my-lg-0" >
-        <input class="form-control mr-sm-2" type="text" id="cityform" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" id="searchButton"><i class="fa fa-search" aria-hidden="true"></i></button>
-      </form>
 
 
 
-       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <script src="./script.js"></script>
-        <link rel="stylesheet" href="style.css">   
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </div>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="./script.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </body>
+
 </html>

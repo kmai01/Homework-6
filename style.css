@@ -22,4 +22,11 @@
     color: white;
    
   }
-  
+  .form-inline{
+      float: left;
+      width: 20%;
+  }
+  .weather-container{
+      float: right;
+      width: 80%;
+  }
