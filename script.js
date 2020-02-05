@@ -1,5 +1,3 @@
-
-
 $("#searchButton").click(function (event) {
     event.preventDefault();
 
@@ -76,23 +74,33 @@ $("#searchButton").click(function (event) {
         method: 'GET'
         }).then(function (response) {
         console.log(response)
-        var forecastHeader = $("<h4>"+"5- Days Forecast"+"</h4>")
-        $(".forecast-container").append(forecastHeader)
+        var forecast = $("<h4>"+"5- Days Forecast"+"</h4>")
+        $(".forecast-container").append(forecast)
 
-       
+    
+        var nextDay=[];
 
-            
+        for (var i = 1 ; i < 6; i++) {
 
-        
-        for ( var j = 7; j < response.list.length; j = j+8) {
-        let unixTimestamp=response.list[i].dt
+           var j = (i * 8)-1
+           
+        let unixTimestamp=response.list[j].dt
         console.log(unixTimestamp);
 
         var date = new Date(unixTimestamp * 1000)
         console.log(date);
         var ndate=moment(date).format('MM/DD/YYYY')
         console.log(ndate);
-        $(".day[i]").text(ndate);
+        
+
+        var day = $("<div>")
+        day.addClass("day")
+        $(".forecast-container").append(day)
+
+         nextDay[i] = $("<div>")
+         nextDay[i].addClass("date")
+         $(".day").append(nextDay[i])
+         nextDay[i].text(ndate);
 
         let icon=response.list[j].weather[0].icon
         console.log(icon);
@@ -106,10 +114,15 @@ $("#searchButton").click(function (event) {
         var humidity=(response.list[j].main.humidity)
         $(".humidity2").text("Humidity: "+humidity+" "+"%");
         console.log(humidity);
-          }
+      
         }
+
+      
+
+    
+          
             
-        });
+    });
 
      
 });

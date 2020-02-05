@@ -30,3 +30,10 @@
       float: right;
       width: 80%;
   }
+
+  .day {
+      height: 100px;
+      width: 200px;
+      background-color:#2196F3 ;
+      border: 20px;
+  }
