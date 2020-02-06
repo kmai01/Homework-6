@@ -19,8 +19,7 @@ $("#searchButton").click(function (event) {
 
     $(document).ready(function() {
     $("body").on("click", ".city-btn", function(event) {
-       // event.preventDefault();
-    // $(document).on("click",".city-btn", )
+    
           var cityname = $(this).attr("data-name");
     
     
@@ -118,7 +117,21 @@ function getweather (cityname) {
         }).then(function (response) {
             console.log(response)
             var uvindex = response.value
-            $(".uv-index").text("UV Index: " + uvindex)
+            var uvdiv= $(".uv-index")
+            uvdiv.text("UV Index: " + uvindex)
+            if( uvindex < 3) {
+                uvdiv.css("background-color", "green")
+            }else if ( uvindex < 6) {
+                uvdiv.css("background-color", "yellow")
+            }else if ( uvindex < 8) {
+                uvdiv.css("background-color", "orange")
+
+            }else if ( uvindex < 11) {
+                uvdiv.css("background-color", "red")
+            } else {
+                uvdiv.css("background-color", "purple")
+            }
+
 
         });
 
