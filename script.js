@@ -1,10 +1,14 @@
+
 $("#searchButton").click(function (event) {
+
     event.preventDefault();
 
     var city = $("#cityform");
     cityname=city.val();
 
     console.log(cityname);
+
+    
 
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q="+cityname+"&appid=981be588e021507f49cbb2c9d6bdad93"
    
@@ -26,9 +30,19 @@ $("#searchButton").click(function (event) {
     var ndate=moment(date).format('MM/DD/YYYY')
     console.log(ndate);
    
-    // Get a city
+    var weathericon = response.weather[0].icon
+    console.log(weathericon)
 
-    $(".city-date").html("<h4>"+response.name+" "+"("+ndate+")"+" "+response.weather[0].icon+"</h4>")
+    
+
+    var iconurl="https://openweathermap.org/img/w/" + weathericon+".png"
+
+   // Get a city
+
+    $(".city-date").html("<h4>"+response.name+" "+"("+ndate+")")
+    $("#wicon").attr("src", iconurl);
+    
+   // $(".wicon").append('<img id="weathericon" src="https://openweathermap.org/img/w/" + weathericon + ".png" />')
     
     // Get temperature and convert to F°
     var tempF = (response.main.temp-273.15)*1.80 +32;
@@ -78,11 +92,10 @@ $("#searchButton").click(function (event) {
         $(".forecast-container").append(forecast)
 
     
-        var nextDay=[];
 
-        for (var i = 1 ; i < 6; i++) {
+        for (var j = 7 ; j < 40; j=j+8) {
 
-           var j = (i * 8)-1
+           
            
         let unixTimestamp=response.list[j].dt
         console.log(unixTimestamp);
@@ -92,37 +105,53 @@ $("#searchButton").click(function (event) {
         var ndate=moment(date).format('MM/DD/YYYY')
         console.log(ndate);
         
-
+        // date 
         var day = $("<div>")
         day.addClass("day")
         $(".forecast-container").append(day)
 
-         nextDay[i] = $("<div>")
-         nextDay[i].addClass("date")
-         $(".day").append(nextDay[i])
-         nextDay[i].text(ndate);
+        var nextDay = $("<div>")
+        nextDay.addClass("date")
+        day.append(nextDay)
+        nextDay.text(ndate);
+
+         // icon
 
         let icon=response.list[j].weather[0].icon
         console.log(icon);
-        $(".icon").text(icon);
+
+        var iconurl="https://openweathermap.org/img/w/" + icon+".png"
+        var img = $('<img id="ficon">')
+        img.attr('src',iconurl );
+        day.append(img)
+
+        
+       
+
+        // Temperature
 
         var tempF = (response.list[j].main.temp-273.15)*1.80 +32;
         console.log(tempF);
         var tempFd= tempF.toFixed(1);
-        $(".temp2").text("Temp: "+tempFd+" "+"°F");
+
+        var nextDayTemp= $("<div>")
+        nextDayTemp.addClass("Temp") 
+        day.append(nextDayTemp)
+        nextDayTemp.text("Temp: "+tempFd+" "+"°F");
+
+        // Humidity
 
         var humidity=(response.list[j].main.humidity)
-        $(".humidity2").text("Humidity: "+humidity+" "+"%");
+        var nextDayHumid= $("<div>")
+        nextDayHumid.addClass("Humid") 
+        day.append(nextDayHumid)
+
+        nextDayHumid.text("Humidity: "+humidity+" "+"%");
         console.log(humidity);
       
         }
 
-      
-
-    
-          
-            
-    });
+       });
 
      
 });
