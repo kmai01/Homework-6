@@ -1,4 +1,6 @@
 
+var cities = [];
+
 $("#searchButton").click(function (event) {
 
     event.preventDefault();
@@ -7,18 +9,56 @@ $("#searchButton").click(function (event) {
     cityname = city.val();
 
     console.log(cityname);
-
+    cities.push(cityname);
     getweather(cityname);
     getforecast(cityname);
+    makebutton();
 
 });
 
 
-function getweather () {
+    $(document).ready(function() {
+    $("body").on("click", ".city-btn", function(event) {
+       // event.preventDefault();
+    // $(document).on("click",".city-btn", )
+          var cityname = $(this).attr("data-name");
+    
+    
+    console.log(cityname);
+
+    getweather(cityname);
+    getforecast(cityname);
+    makebutton();
+});
+
+});
+
+function makebutton () {
+
+
+    // prevent repeat button
+    $("#cities-button").empty();
+
+    for ( var i =0 ; i < cities.length; i++) {
+
+        var a = $("<button>");
+        a.addClass("city-btn");
+        a.attr("data-name",cities[i]);
+        a.text(cities[i]);
+        $("#cities-button").append(a);
+
+    }
+
+
+
+}
+
+
+function getweather (cityname) {
 
     var weatherURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityname + "&appid=981be588e021507f49cbb2c9d6bdad93"
 
-
+    console.log(cityname)
 
     $.ajax({
         url: weatherURL,
@@ -87,21 +127,22 @@ function getweather () {
 }
 
 
-function getforecast() {
+function getforecast(cityname) {
 
     var forecastURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityname + "&appid=981be588e021507f49cbb2c9d6bdad93"
-
+    console.log(cityname)
     $.ajax({
         url: forecastURL,
         method: 'GET'
     }).then(function (response) {
         console.log(response)
-        var forecast = $("<h4>" + "5- Days Forecast" + "</h4>")
+        
+        var forecast = $("<h4>" + "5- Days Forecast " + response.city.name+"</h4>")
         $(".forecast-container").append(forecast)
 
 
 
-        for (var j = 7; j < 40; j = j + 8) {
+        for (var j = 7; j < response.list.length; j = j + 8) {
 
 
 
@@ -163,4 +204,4 @@ function getforecast() {
 
 }
 
-
+makebutton();
