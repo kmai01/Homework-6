@@ -11,6 +11,12 @@ $("#searchButton").click(function (event) {
     console.log(cityname);
     cities.push(cityname);
     getweather(cityname);
+
+    // removed previous forecast div before call again to create div
+    $(".forecast-title").empty();
+    $(".forecast-container").empty();
+   
+
     getforecast(cityname);
     makebutton();
 
@@ -26,6 +32,11 @@ $("#searchButton").click(function (event) {
     console.log(cityname);
 
     getweather(cityname);
+
+    // removed previous forecast div call again to create div
+    $(".forecast-title").empty();
+    $(".forecast-container").empty();
+
     getforecast(cityname);
     makebutton();
 });
@@ -151,7 +162,7 @@ function getforecast(cityname) {
         console.log(response)
         
         var forecast = $("<h4>" + "5- Days Forecast " + response.city.name+"</h4>")
-        $(".forecast-container").append(forecast)
+        $(".forecast-title").append(forecast)
 
 
 
